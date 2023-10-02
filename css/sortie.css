@@ -1,0 +1,368 @@
+/*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    background: #dfe9f5;
+}
+.container{
+    display: flex;
+}
+nav{
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    background: #fff;
+    width: 280px;
+    overflow: hidden;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.logo{
+    text-align: center;
+    display: flex;
+    margin: 10px 0 0 10px;
+}
+.logo img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.logo span{
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+a{
+    position: relative;
+    color: rgb(85, 83, 83);
+    font-size: 14px;
+    display: table;
+    width: 280px;
+    padding: 10px;
+}
+nav .fas{
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+}
+.nav-item{
+    position: relative;
+    top: 12px;
+    margin-left: 10px;
+}
+a:hover{
+    background: #eee;
+}
+.logout{
+    position: absolute;
+    bottom: 0;
+}
+
+/* Main Section */
+.main{
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+.main-top{
+    display: flex;
+    width: 100%;
+}
+.main-top i{
+    position: absolute;
+    right: 0;
+    margin: 10px 30px;
+    color: rgb(110, 109, 109);
+    cursor: pointer;
+}
+.main-skills{
+    display: flex;
+    margin-top: 20px;
+}
+.main-skills .card{
+    width: 25%;
+    margin: 10px;
+    background: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.main-skills .card h3{
+    margin: 10px;
+    text-transform: capitalize;
+}
+.main-skills .card p{
+    font-size: 12px;
+}
+.main-skills .card button{
+    background: orangered;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.main-skills .card button:hover{
+    background: rgba(223, 70, 15, 0.856);
+}
+.main-skills .card i{
+    font-size: 22px;
+    padding: 10px;
+}
+
+/* Courses */
+.main-course{
+    margin-top:20px ;
+    text-transform: capitalize;
+}
+.course-box{
+    width: 100%;
+    height: 300px;
+    padding: 10px 10px 30px 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.course-box ul{
+    list-style: none;
+    display: flex;
+}
+.course-box ul li{
+    margin: 10px;
+    color: gray;
+    cursor: pointer;
+}
+.course-box ul .active{
+    color: #000;
+    border-bottom: 1px solid #000;
+}
+.course-box .course{
+    display: flex;
+}
+.box{
+    width: 33%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background: rgb(235, 233, 233);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.box p{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.box button{
+    background: #000;
+    color: #fff;
+    padding: 7px 10px;
+    border-radius: 10px;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+.box button:hover{
+    background: rgba(0, 0, 0, 0.842);
+}
+.box i{
+    font-size: 7rem;
+    float: right;
+    margin: -20px 20px 20px 0;
+}
+.html{
+    color: rgb(25, 94, 54);
+}
+.css{
+    color: rgb(104, 179, 35);
+}
+.js{
+    color: rgb(28, 98, 179);
+}
+/* Add this to style the active link */
+.active a {
+    background-color: green; /* Change this to your desired color */
+    color: #fff; /* Change this to your desired text color */
+
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form button {
+
+}
+.form button:hover,.form button:active,.form button:focus {
+    background: #43A047;
+}
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+.form .register-form {
+    display: none;
+}
+
+
+.add-client-container {
+    position: fixed;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    max-width: 314px;
+    margin: 3px auto;
+    display: none;
+    opacity: 0;
+    padding: 19px;
+    background: #eeeeee;
+    border-radius: 27px;
+    box-shadow: 0 -14px 26px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+.add{
+    margin-left: 734px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 14%;
+    border: 8;
+    padding: 8px;
+    color: #FFFFFF;
+    font-size: 13px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+
+}
+.send{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+
+}
+
+
+
+
+/* CSS for the modal container */
+.modal {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Position it fixed (overlapping everything) */
+    z-index: 1; /* Make it appear above everything else */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scrolling if the content overflows */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+/* Style for the modal content */
+.modal-content {
+    position: fixed;
+    left: 800px;
+
+    background-color: #eeeeee;
+    margin: 10% auto; /* 10% from the top and centered horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%; /* Set the width of the modal */
+    animation: zoom 0.3s; /* Add a zoom animation */
+}
+
+/* Animation for the modal */
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Style for the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.here{
+    background-color: red;
+    margin-left: 100px;
+}
+dd{
+    background-color: #00bf00;
+}
