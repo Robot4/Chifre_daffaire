@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 </head>
 
-<body>
+<body >
 <div class="container">
 
     <?php include 'menu.php'; ?>
@@ -39,7 +39,6 @@
                             <option value="Demandé">Demandé</option>
                             <option value="Livré">Livré</option>
                             <option value="Refusé">Refusé</option>
-                            <option value="Retour">Retour</option> <!-- Add 'Retour' option -->
                         </select>
                         <input class="send" type="submit" value="Add Client">
                     </form>
@@ -83,32 +82,65 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (isset($_POST['status']) && $_POST['status'] == 'Retour') {
-                    $image = $_POST['image'];
-                    $name = $_POST['name'];
-                    $commande = $_POST['commande'];
-                    $prix = $_POST['prix'];
-                    $ville = $_POST['ville'];
-                    $status = $_POST['status'];
 
-                    // Insert data into the "stock" table
-                    $sql = "INSERT INTO stock (image, name, commande, prix, ville, status) VALUES (?, ?, ?, ?, ?, ?)";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ssssss", $image, $name, $commande, $prix, $ville, $status);
 
-                    if ($stmt->execute()) {
-                        // Data inserted successfully into the "stock" table
-                        echo "Data inserted into stock table.";
-                    } else {
-                        echo "Error inserting data into stock table: " . $conn->error;
-                    }
+            // Calculate the total number of clients
+            $sqlCount = "SELECT COUNT(*) AS total FROM stock";
+            $countResult = $conn->query($sqlCount);
+            $countRow = $countResult->fetch_assoc();
+            $totalClients = $countRow['total'];
 
-                }
+            // Calculate the current page and the starting index
+            $perPage = 4; // Number of clients to display per page
+            if (isset($_GET['page'])) {
+                $currentPage = $_GET['page'];
+            } else {
+                $currentPage = 1;
             }
 
-            // Rest of your code to fetch and display data from the "stock" table
-            // ...
+            $startIndex = ($currentPage - 1) * $perPage;
+
+            // SQL query to select a limited number of records based on the current page
+            $sql = "SELECT * FROM stock LIMIT $startIndex, $perPage";
+            $result = $conn->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                while ($rowEntrer = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    // Display the image using an <img> tag
+                    echo "<td><img src='" . $rowEntrer["image"] . "' alt='Client Image' width='50'></td>";
+                    echo "<td>" . $rowEntrer["name"] . "</td>";
+                    echo "<td>" . $rowEntrer["commande"] . "</td>";
+                    echo "<td>" . $rowEntrer["prix"] . "</td>";
+                    echo "<td>" . $rowEntrer["ville"] . "</td>";
+                    echo "<td>" . $rowEntrer["status"] . "</td>";
+                    // Add an edit button with a data-client-id attribute (if needed)
+                    echo "<td><a href='javascript:void(0);' class='edit-client' data-client-id='" . $rowEntrer["id"] . "'><i class='fas fa-edit'></i> Edit</a> | <a href='delete_stock.php?id=" . $rowEntrer["id"] . "'><i class='fas fa-trash'></i> Delete</a></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='7'>No clients with 'retour' & 'refusé' status found in 'entrer' table.</td></tr>";
+            }
+
+            // Calculate the total number of clients
+            $sqlCount = "SELECT COUNT(*) AS total FROM clients";
+            $countResult = $conn->query($sqlCount);
+            $countRow = $countResult->fetch_assoc();
+            $totalClients = $countRow['total'];
+
+            // Calculate the current page and the starting index
+            $perPage = 4;
+            if (isset($_GET['page'])) {
+                $currentPage = $_GET['page'];
+            } else {
+                $currentPage = 1;
+            }
+
+            $startIndex = ($currentPage - 1) * $perPage;
+
+            // SQL query to select a limited number of records based on the current page
+            $sql = "SELECT * FROM clients LIMIT $startIndex, $perPage";
+            $result = $conn->query($sql);
 
             // Close the database connection
             ?>
@@ -123,33 +155,35 @@
             $currentPage = 1;
         }
 
+
         // Calculate the starting client index for the current page
         $startIndex = ($currentPage - 1) * $perPage;
 
         // SQL query to select a limited number of records based on the current page
-        $sql = "SELECT * FROM entrer LIMIT $startIndex, $perPage";
+        $sql = "SELECT * FROM stock LIMIT $startIndex, $perPage";
         $result = $conn->query($sql);
-        echo '<div class="here">';
+        echo '<div class"here">';
         if ($currentPage > 1) {
-            echo "<a class='dd' href='entre.php?page=" . ($currentPage - 1) . "'>Previous</a>";
+            echo "<a class=dd href='entre.php?page=" . ($currentPage - 1) . "'>Previous</a>";
         }
 
         // Display "Next" button if there are more clients to show
-        $sqlCount = "SELECT COUNT(*) AS total FROM entrer";
+        $sqlCount = "SELECT COUNT(*) AS total FROM stock";
         $countResult = $conn->query($sqlCount);
         $countRow = $countResult->fetch_assoc();
         $totalClients = $countRow['total'];
 
         if ($totalClients > $startIndex + $perPage) {
-            echo "<a class='dd' href='entre.php?page=" . ($currentPage + 1) . "'>Next</a>";
+            echo "<a class=dd href='entre.php?page=" . ($currentPage + 1) . "'>Next</a>";
         }
 
-        echo '</div>';
+        echo '<div/>'
 
         // Close the database connection here, at the end of the script
-        $conn->close();
         ?>
         <script>
+
+
             // JavaScript code to toggle form visibility with a smooth animation
             const showFormButton = document.getElementById('showFormButton');
             const addClientContainer = document.getElementById('addClientContainer');
@@ -170,8 +204,10 @@
                     }, 300); // Delay to match the CSS transition duration (300ms)
                 }
             });
+
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
             // Define the openEditForm function in the global scope
             function openEditForm(clientId) {
@@ -193,6 +229,7 @@
                 });
             }
         </script>
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const editButtons = document.querySelectorAll(".edit-client");
@@ -232,8 +269,11 @@
                     });
                 }
             });
+
         </script>
     </section>
+
+
 </div>
 </body>
 </html>

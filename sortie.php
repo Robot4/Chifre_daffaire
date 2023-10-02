@@ -42,6 +42,56 @@ if ($conn->query($sqlMoveToEntrer) === TRUE) {
 }
 
 
+// SQL query to select clients with 'Livré' or 'Refusé' status from 'clients' table
+$sqlMoveToEntrer = "INSERT INTO stock (image, name, commande, prix, ville, status)
+                     SELECT image, name, commande, prix, ville, status
+                     FROM clients
+                     WHERE status IN ('Retour')
+                     AND moved_to_entrer = 0"; // Add a condition to check if not moved
+
+if ($conn->query($sqlMoveToEntrer) === TRUE) {
+    // Update the 'moved_to_entrer' field for the moved records
+    $updateMovedFlag = "UPDATE clients
+                         SET moved_to_entrer = 1
+                         WHERE status IN ('Retour')
+                         AND moved_to_entrer = 0";
+
+    if ($conn->query($updateMovedFlag) === TRUE) {
+    } else {
+        echo "Error updating 'moved_to_entrer' flag: " . $conn->error;
+    }
+} else {
+    echo "Error moving data to 'entrer' table: " . $conn->error;
+}
+
+// SQL query to select clients with 'Refusé' status from 'clients' table
+$sqlMoveToStock = "INSERT INTO stock (image, name, commande, prix, ville, status)
+                     SELECT image, name, commande, prix, ville, status
+                     FROM clients
+                     WHERE status = 'Refusé'
+                     AND moved_to_stock = 0"; // Add a condition to check if not moved
+
+if ($conn->query($sqlMoveToStock) === TRUE) {
+    // Update the 'moved_to_stock' field for the moved records
+    $updateMovedFlag = "UPDATE clients
+                         SET moved_to_stock = 1
+                         WHERE status = 'Refusé'
+                         AND moved_to_stock = 0";
+
+    if ($conn->query($updateMovedFlag) === TRUE) {
+    } else {
+        echo "Error updating 'moved_to_stock' flag: " . $conn->error;
+    }
+} else {
+    echo "Error moving data to 'stock' table: " . $conn->error;
+}
+
+
+
+
+
+
+
 
 
 
