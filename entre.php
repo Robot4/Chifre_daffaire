@@ -1,9 +1,37 @@
+<?php
+// Establish a database connection (replace with your database credentials)
+session_start(); // Start a session
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ca";
+
+// Create a new database connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// Calculate the current page and the starting index
+$perPage = 5;
+if (isset($_GET['page'])) {
+$currentPage = $_GET['page'];
+} else {
+$currentPage = 1;
+}
+
+$startIndex = ($currentPage - 1) * $perPage;
+
+// SQL query to select a limited number of records based on the current page
+$sql = "SELECT * FROM stock LIMIT $startIndex, $perPage";
+$result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8" />
-    <title>Dashboard | By Code Info</title>
+    <title>Ventes</title>
     <link rel="stylesheet" href="css/sortie.css" />
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -69,17 +97,7 @@
             </thead>
             <tbody>
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "ca";
 
-            // Create a new database connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
 
 
 

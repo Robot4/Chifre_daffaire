@@ -88,13 +88,6 @@ if ($conn->query($sqlMoveToStock) === TRUE) {
 
 
 
-
-
-
-
-
-
-
 // Calculate the total number of clients
 $sqlCount = "SELECT COUNT(*) AS total FROM clients";
 $countResult = $conn->query($sqlCount);
@@ -102,7 +95,7 @@ $countRow = $countResult->fetch_assoc();
 $totalClients = $countRow['total'];
 
 // Calculate the current page and the starting index
-$perPage = 4;
+$perPage = 5;
 if (isset($_GET['page'])) {
     $currentPage = $_GET['page'];
 } else {
@@ -250,8 +243,6 @@ $result = $conn->query($sql);
             // Close the database connection here, at the end of the script
             ?>
 
-
-            </div>
             <script>
 
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Dashboard | By Code Info</title>
+    <title>Stock</title>
     <link rel="stylesheet" href="css/sortie.css" />
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -164,7 +164,7 @@
         $result = $conn->query($sql);
         echo '<div class"here">';
         if ($currentPage > 1) {
-            echo "<a class=dd href='entre.php?page=" . ($currentPage - 1) . "'>Previous</a>";
+            echo "<a class=dd href='stock.php?page=" . ($currentPage - 1) . "'>Previous</a>";
         }
 
         // Display "Next" button if there are more clients to show
@@ -174,7 +174,7 @@
         $totalClients = $countRow['total'];
 
         if ($totalClients > $startIndex + $perPage) {
-            echo "<a class=dd href='entre.php?page=" . ($currentPage + 1) . "'>Next</a>";
+            echo "<a class=dd href='stock.php?page=" . ($currentPage + 1) . "'>Next</a>";
         }
 
         echo '<div/>'

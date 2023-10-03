@@ -358,11 +358,24 @@ input {
     text-decoration: none;
     cursor: pointer;
 }
+/* Pagination buttons */
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
-.here{
-    background-color: red;
-    margin-left: 100px;
+.pagination a {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-dd{
-    background-color: #00bf00;
+
+.pagination a:hover {
+    background-color: #43A047;
 }
+
