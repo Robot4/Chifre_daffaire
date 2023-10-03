@@ -136,27 +136,51 @@ $result = $conn->query($sql);
             </center>
 
 <div class="container1">
-            <div class="form">
-                <!-- Add the "Ajouter" button -->
+    <div class="form">
+        <!-- Add the "Ajouter" button -->
 
-                <!-- Container for the form to add a new client (initially hidden) -->
-                <div class="add-client-container" id="addClientContainer" style="display: none;">
-                    <form action="add_client.php" method="POST" enctype="multipart/form-data" class="login-form">
-                        <input type="file" name="image" accept="image/*" required>
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="text" name="commande" placeholder="Commande" required>
-                        <input type="text" name="prix" placeholder="Prix" required>
-                        <input type="text" name="ville" placeholder="Ville" required>
-                        <select name="status" required>
-                            <option value="Demandé">Demandé</option>
-                            <option value="Livré">Livré</option>
-                            <option value="Retour">Retour</option>
-                            <option value="Refusé">Refusé</option>
-                        </select>
-                        <input class="send" type="submit" value="Add Client">
-                    </form>
-                </div>
-            </div>
+        <!-- Container for the form to add a new client (initially hidden) -->
+        <div class="add-client-container" id="addClientContainer" style="display: none;">
+            <form action="add_client.php" method="POST" enctype="multipart/form-data" class="login-form">
+                <input type="file" name="image" accept="image/*" required>
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="commande" placeholder="Commande" required>
+                <input type="text" name="prix" placeholder="Prix" required>
+
+                <!-- Modify the Ville input to a <select> with options -->
+                <select name="ville" required>
+                    <option value="" disabled selected>Select Ville</option>
+                    <?php
+                    // Establish a database connection (similar to your existing code)
+                    // ...
+
+                    // SQL query to select "ville" options from the ville_price table
+                    $sqlVilleOptions = "SELECT ville FROM ville_price";
+                    $villeOptionsResult = $conn->query($sqlVilleOptions);
+
+                    if ($villeOptionsResult->num_rows > 0) {
+                        while ($villeRow = $villeOptionsResult->fetch_assoc()) {
+                            echo "<option value='" . $villeRow["ville"] . "'>" . $villeRow["ville"] . "</option>";
+
+                        }
+                    }
+
+                    // Close the database connection (similar to your existing code)
+                    // ...
+                    ?>
+                </select>
+
+                <select name="status" required>
+                    <option value="Demandé">Demandé</option>
+                    <option value="Livré">Livré</option>
+                    <option value="Retour">Retour</option>
+                    <option value="Refusé">Refusé</option>
+                </select>
+                <input class="send" type="submit" value="Add Client">
+            </form>
+        </div>
+    </div>
+
 </div>
 
             <div id="editClientModal" class="modal">

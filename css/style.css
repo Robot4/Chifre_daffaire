@@ -106,18 +106,19 @@ a:hover{
     text-transform: capitalize;
 }
 .main-skills .card p{
-    font-size: 12px;
+    font-size: 20px;
 }
 .main-skills .card button{
-    background: orangered;
+    background: #008115;
     color: #fff;
     padding: 7px 15px;
     border-radius: 10px;
     margin-top: 15px;
     cursor: pointer;
+    font-size: 20px;
 }
 .main-skills .card button:hover{
-    background: rgba(223, 70, 15, 0.856);
+    background: black;
 }
 .main-skills .card i{
     font-size: 22px;

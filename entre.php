@@ -26,6 +26,32 @@ $startIndex = ($currentPage - 1) * $perPage;
 $sql = "SELECT * FROM stock LIMIT $startIndex, $perPage";
 $result = $conn->query($sql);
 ?>
+
+<?php
+function calculateTotal($conn)
+{
+    // Calculate the total based on the conditions
+    $total = 0;
+
+    // Query to calculate the total for "Livré" status
+    $livreQuery = "SELECT SUM(prix - price) AS livré_total FROM sortie WHERE status = 'Livré'";
+    $livreResult = $conn->query($livreQuery);
+    $livreRow = $livreResult->fetch_assoc();
+    $livreTotal = $livreRow['livré_total'];
+
+    // Query to calculate the total for "Refusé" status
+    $refuseQuery = "SELECT SUM(prix - 15) AS refuse_total FROM sortie WHERE status = 'Refusé'";
+    $refuseResult = $conn->query($refuseQuery);
+    $refuseRow = $refuseResult->fetch_assoc();
+    $refuseTotal = $refuseRow['refuse_total'];
+
+    // Add the totals for "Livré" and "Refusé" statuses
+    $total = $livreTotal + $refuseTotal;
+
+    return $total;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -61,7 +87,25 @@ $result = $conn->query($sql);
                         <input type="text" name="name" placeholder="Name" required>
                         <input type="text" name="commande" placeholder="Commande" required>
                         <input type="text" name="prix" placeholder="Prix" required>
-                        <input type="text" name="ville" placeholder="Ville" required>
+
+
+                        <select name="ville" required>
+                            <option value="" disabled selected>Select Ville</option>
+                            <?php
+                            // Query the database to fetch the "ville" values from the "ville_price" table
+                            $villeQuery = "SELECT DISTINCT ville FROM ville_price";
+                            $villeResult = $conn->query($villeQuery);
+
+                            if ($villeResult->num_rows > 0) {
+                                while ($row = $villeResult->fetch_assoc()) {
+                                    $ville = $row['ville'];
+                                    echo "<option value='$ville'>$ville</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+
+
                         <select name="status" required>
                             <option value="Demandé">Demandé</option>
                             <option value="Livré">Livré</option>

@@ -5,6 +5,58 @@ $currentURL = $_SERVER['PHP_SELF'];
 // Extract just the filename without the path
 $currentPage = basename($currentURL);
 ?>
+
+<?php
+// Establish a database connection (replace with your database credentials)
+session_start(); // Start a session
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ca";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// SQL query to select all prix values from the 'clients' table
+$sqlTotalPrix = "SELECT SUM(prix) AS total_prix FROM clients";
+$totalPrixResult = $conn->query($sqlTotalPrix);
+$totalPrixRow = $totalPrixResult->fetch_assoc();
+$totalPrix = $totalPrixRow['total_prix'];
+
+// SQL query to select the total number of items in stock from the 'stock' table
+$sqlTotalStockItems = "SELECT SUM(1) AS total_stock_items FROM stock";
+$totalStockItemsResult = $conn->query($sqlTotalStockItems);
+$totalStockItemsRow = $totalStockItemsResult->fetch_assoc();
+$totalStockItems = $totalStockItemsRow['total_stock_items'];
+
+
+
+// Write a SQL query to fetch prix, ville, and status from the entrer and ville_price tables
+$sql = "SELECT SUM(CASE 
+                WHEN e.status = 'Livré' THEN e.prix - vp.price
+                WHEN e.status = 'Refusé' THEN e.prix - 15
+                ELSE 0
+           END) AS total FROM entrer AS e
+        LEFT JOIN ville_price AS vp ON e.ville = vp.ville";
+$result = $conn->query($sql);
+$totalPrice = 0; // Initialize the total price variable
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    // Get the total price from the query result
+    $totalPrice = $row['total'];
+}
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +108,9 @@ $currentPage = basename($currentURL);
         </ul>
     </nav>
 
+
+
+
     <section class="main">
         <div class="main-top">
             <h1>Skills</h1>
@@ -65,26 +120,22 @@ $currentPage = basename($currentURL);
             <div class="card">
                 <i class="fas fa-laptop-code"></i>
                 <h3>Les Dépenses</h3>
-                <p>Join Over 1 million Students.</p>
-                <button>Get Started</button>
+                <button><p><?php echo $totalPrix; ?> Dhs</p></button>
             </div>
             <div class="card">
                 <i class="fab fa-wordpress"></i>
-                <h3>WordPress</h3>
-                <p>Join Over 3 million Students.</p>
-                <button>Get Started</button>
+                <h3>Ventes</h3>
+                <button> <?php echo $totalPrice; ?> Dhs</button>
             </div>
             <div class="card">
                 <i class="fas fa-palette"></i>
                 <h3>graphic design</h3>
-                <p>Join Over 2 million Students.</p>
                 <button>Get Started</button>
             </div>
             <div class="card">
                 <i class="fab fa-app-store-ios"></i>
-                <h3>IOS dev</h3>
-                <p>Join Over 1 million Students.</p>
-                <button>Get Started</button>
+                <h3>Stock</h3>
+                <button><?php echo $totalStockItems; ?></button>
             </div>
         </div>
 
