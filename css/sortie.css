@@ -10,7 +10,7 @@
     font-family: "Poppins", sans-serif;
 }
 body{
-    background: #dfe9f5;
+    background: #f7f7f7;
 }
 .container{
     display: flex;
@@ -377,5 +377,15 @@ input {
 
 .pagination a:hover {
     background-color: #43A047;
+}
+.ville{
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 

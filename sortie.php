@@ -148,7 +148,7 @@ $result = $conn->query($sql);
                 <input type="text" name="prix" placeholder="Prix" required>
 
                 <!-- Modify the Ville input to a <select> with options -->
-                <select name="ville" required>
+                <select class="ville" name="ville" required>
                     <option value="" disabled selected>Select Ville</option>
                     <?php
                     // Establish a database connection (similar to your existing code)
@@ -170,7 +170,7 @@ $result = $conn->query($sql);
                     ?>
                 </select>
 
-                <select name="status" required>
+                <select class="ville" name="status" required>
                     <option value="Demandé">Demandé</option>
                     <option value="Livré">Livré</option>
                     <option value="Retour">Retour</option>
@@ -214,7 +214,7 @@ $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             // Display the image using an <img> tag
-                            echo "<td><img src='" . $row["image"] . "' alt='Client Image' width='50'></td>";
+                            echo "<td><img src='" . $row["image"] . "' alt='Client Image' width='80'></td>";
                             echo "<td>" . $row["name"] . "</td>";
                             echo "<td>" . $row["commande"] . "</td>";
                             echo "<td>" . $row["prix"] . "</td>";

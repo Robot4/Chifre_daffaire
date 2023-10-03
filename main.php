@@ -50,6 +50,10 @@ if ($result->num_rows > 0) {
     // Get the total price from the query result
     $totalPrice = $row['total'];
 }
+
+//benefice
+$totalDifference = $totalPrice - $totalPrix;
+
 ?>
 
 
@@ -124,16 +128,16 @@ if ($result->num_rows > 0) {
             </div>
             <div class="card">
                 <i class="fab fa-wordpress"></i>
-                <h3>Ventes</h3>
+                <h3>Chiffre D'affaire</h3>
                 <button> <?php echo $totalPrice; ?> Dhs</button>
             </div>
             <div class="card">
                 <i class="fas fa-palette"></i>
-                <h3>graphic design</h3>
-                <button>Get Started</button>
+                <h3>Bénéfices</h3>
+                <button><?php echo $totalDifference; ?> Dhs</button>
             </div>
             <div class="card">
-                <i class="fab fa-app-store-ios"></i>
+                <i class="fa fa-warehouse"></i>
                 <h3>Stock</h3>
                 <button><?php echo $totalStockItems; ?></button>
             </div>

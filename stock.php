@@ -91,7 +91,7 @@
             $totalClients = $countRow['total'];
 
             // Calculate the current page and the starting index
-            $perPage = 4; // Number of clients to display per page
+            $perPage = 5; // Number of clients to display per page
             if (isset($_GET['page'])) {
                 $currentPage = $_GET['page'];
             } else {
@@ -108,7 +108,7 @@
                 while ($rowEntrer = $result->fetch_assoc()) {
                     echo "<tr>";
                     // Display the image using an <img> tag
-                    echo "<td><img src='" . $rowEntrer["image"] . "' alt='Client Image' width='50'></td>";
+                    echo "<td><img src='" . $rowEntrer["image"] . "' alt='Client Image' width='80'></td>";
                     echo "<td>" . $rowEntrer["name"] . "</td>";
                     echo "<td>" . $rowEntrer["commande"] . "</td>";
                     echo "<td>" . $rowEntrer["prix"] . "</td>";
@@ -148,7 +148,7 @@
         </table>
         <?php
         // Calculate the total number of clients and the current page
-        $perPage = 4;
+        $perPage = 5;
         if (isset($_GET['page'])) {
             $currentPage = $_GET['page'];
         } else {
