@@ -389,3 +389,40 @@ input {
     font-size: 14px;
 }
 
+.status-button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    border: none;
+    padding: 8px;
+    color: #FFFFFF;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    line-height: 12px;
+    font-size: 11px;
+    width: 100px;
+
+}
+
+.demande {
+    background-color: green;
+    color: white;
+
+}
+
+.livre {
+    background: #032978;
+
+
+}
+
+.retour {
+    background-color: #b61d07;
+    color: white;
+}
+
+.refuse {
+    background-color: #ae400b;
+    color: white;
+}

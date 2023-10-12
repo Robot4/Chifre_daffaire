@@ -86,6 +86,7 @@ if ($conn->query($sqlMoveToStock) === TRUE) {
     echo "Error moving data to 'stock' table: " . $conn->error;
 }
 
+// SQL query to select clients with 'Demandé' status and order by status
 
 
 // Calculate the total number of clients
@@ -95,7 +96,7 @@ $countRow = $countResult->fetch_assoc();
 $totalClients = $countRow['total'];
 
 // Calculate the current page and the starting index
-$perPage = 5;
+$perPage = 4;
 if (isset($_GET['page'])) {
     $currentPage = $_GET['page'];
 } else {
@@ -107,6 +108,21 @@ $startIndex = ($currentPage - 1) * $perPage;
 // SQL query to select a limited number of records based on the current page
 $sql = "SELECT * FROM clients LIMIT $startIndex, $perPage";
 $result = $conn->query($sql);
+
+
+// SQL query to select clients and order by status
+$sql = "SELECT * FROM clients
+        ORDER BY CASE 
+            WHEN status = 'Demandé' THEN 1 
+            ELSE 2 
+        END, name ASC
+        LIMIT $startIndex, $perPage";
+$result = $conn->query($sql);
+
+
+
+
+
 ?>
 
 
@@ -120,6 +136,7 @@ $result = $conn->query($sql);
         <!-- Font Awesome Cdn Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     </head>
     <body>
@@ -175,6 +192,7 @@ $result = $conn->query($sql);
                     <option value="Livré">Livré</option>
                     <option value="Retour">Retour</option>
                     <option value="Refusé">Refusé</option>
+
                 </select>
                 <input class="send" type="submit" value="Add Client">
             </form>
@@ -219,7 +237,32 @@ $result = $conn->query($sql);
                             echo "<td>" . $row["commande"] . "</td>";
                             echo "<td>" . $row["prix"] . "</td>";
                             echo "<td>" . $row["ville"] . "</td>";
-                            echo "<td>" . $row["status"] . "</td>";
+                            // Apply different styles based on the status
+                            $statusClass = "";
+
+                            switch ($row["status"]) {
+                                case "Demandé":
+                                    $statusClass = "demande";
+                                    break;
+                                case "Livré":
+                                    $statusClass = "livre";
+                                    break;
+                                case "Retour":
+                                    $statusClass = "retour";
+                                    break;
+                                case "Refusé":
+                                    $statusClass = "refuse";
+                                    break;
+                            }
+
+                            // Add a class to the <td> element to style it as a button
+                            echo "<td>";
+                            echo "<center>";
+
+                            echo "<button class='status-button $statusClass'>" . $row["status"] . "</button>";
+
+                            echo "</center>";
+                            echo "</td>";
                             // Add an edit button with a data-client-id attribute
                             echo "<td class='icon-container'><a href='javascript:void(0);' class='edit-client' data-client-id='" . $row["id"] . "'><i class='fas fa-edit'></i>Edit</a><a href='delete_client.php?id=" . $row["id"] . "'><i class='fas fa-trash'></i>Delete</a></td>";
                             echo "</tr>";
@@ -233,7 +276,7 @@ $result = $conn->query($sql);
 
             <?php
             // Calculate the total number of clients and the current page
-            $perPage = 5;
+            $perPage = 4;
             if (isset($_GET['page'])) {
                 $currentPage = $_GET['page'];
             } else {

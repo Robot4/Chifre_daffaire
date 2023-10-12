@@ -113,7 +113,27 @@
                     echo "<td>" . $rowEntrer["commande"] . "</td>";
                     echo "<td>" . $rowEntrer["prix"] . "</td>";
                     echo "<td>" . $rowEntrer["ville"] . "</td>";
-                    echo "<td>" . $rowEntrer["status"] . "</td>";
+                    // Apply different styles based on the status
+                    $statusClass = "";
+
+                    switch ($rowEntrer["status"]) {
+                        case "Retour":
+                            $statusClass = "retour";
+                            break;
+                        case "Refusé":
+                            $statusClass = "refuse";
+                            break;
+                        default:
+                            // Set a default class if needed
+                            $statusClass = "default-button";
+                            break;
+                    }
+
+                    // Add a class to the <td> element to style it as a button
+                    echo "<td>";
+                    echo "<button class='status-button $statusClass'>" . $rowEntrer["status"] . "</button>";
+                    echo "</td>";
+
                     // Add an edit button with a data-client-id attribute (if needed)
                     echo "<td><a href='javascript:void(0);' class='edit-client' data-client-id='" . $rowEntrer["id"] . "'><i class='fas fa-edit'></i> Edit</a> | <a href='delete_stock.php?id=" . $rowEntrer["id"] . "'><i class='fas fa-trash'></i> Delete</a></td>";
                     echo "</tr>";
