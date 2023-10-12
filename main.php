@@ -65,7 +65,7 @@ $totalDifference = $totalPrice - $totalPrix;
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Dashboard | By Code Info</title>
+    <title>Dashboard | By Mehdi</title>
     <link rel="stylesheet" href="css/style.css" />
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -117,7 +117,6 @@ $totalDifference = $totalPrice - $totalPrix;
 
     <section class="main">
         <div class="main-top">
-            <h1>Skills</h1>
             <i class="fas fa-user-cog"></i>
         </div>
         <div class="main-skills">

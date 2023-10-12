@@ -122,6 +122,14 @@ $result = $conn->query($sql);
 
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_query'])) {
+    $searchQuery = $_GET['search_query'];
+
+    // SQL query to search clients by name or ville
+    $searchSql = "SELECT * FROM clients WHERE name LIKE '%" . $searchQuery . "%' OR ville LIKE '%" . $searchQuery . "%'";
+
+    $result = $conn->query($searchSql);
+}
 
 ?>
 
@@ -131,7 +139,7 @@ $result = $conn->query($sql);
     <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Dashboard | By Code Info</title>
+        <title>Achat</title>
         <link rel="stylesheet" href="css/sortie.css" />
         <!-- Font Awesome Cdn Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -143,7 +151,6 @@ $result = $conn->query($sql);
     <div class="container">
         <?php include 'menu.php'; ?>
         <section class="main">
-            <h1>Client Table</h1>
             <center>
                 <button id="showFormButton" class="add">
                     <i class="fas fa-plus"></i> Ajouter
@@ -198,6 +205,37 @@ $result = $conn->query($sql);
             </form>
         </div>
     </div>
+
+
+
+    <div class="search-bar">
+        <form method="GET">
+            <input class="cherch" type="text" name="search_query" id="searchQuery" placeholder="Search by Name or Ville" required>
+        </form>
+    </div>
+
+    <script>
+        // Get the search input element
+        const searchInput = document.getElementById('searchQuery');
+
+        // Listen for the "Enter" keypress
+        searchInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Trim and get the search query
+                const searchQuery = searchInput.value.trim();
+
+                // Check if the search query is not empty before performing the search
+                if (searchQuery) {
+                    // Perform the search by redirecting to the search URL
+                    window.location.href = `yourpage.php?search_query=${searchQuery}`;
+                }
+            }
+        });
+    </script>
+
 
 </div>
 

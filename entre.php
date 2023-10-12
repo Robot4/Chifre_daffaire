@@ -50,6 +50,12 @@ function calculateTotal($conn)
 
     return $total;
 }
+// SQL query to select clients (with or without a search query)
+$searchQuery = isset($_GET['search_query']) ? $_GET['search_query'] : '';
+$sql = "SELECT * FROM entrer WHERE name LIKE '%$searchQuery%' OR ville LIKE '%$searchQuery%'";
+$result = $conn->query($sql);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -67,13 +73,16 @@ function calculateTotal($conn)
 <div class="container">
     <?php include 'menu.php'; ?>
     <section class="main">
-        <h1>Client Table</h1>
         <center>
             <button id="showFormButton" class="add">
                 <i class="fas fa-plus"></i> Ajouter
             </button>
             <br>
             <br>
+
+
+
+
         </center>
 
         <div class="container1">
@@ -115,6 +124,8 @@ function calculateTotal($conn)
                     </form>
                 </div>
             </div>
+
+
         </div>
 
         <div id="editClientModal" class="modal">
