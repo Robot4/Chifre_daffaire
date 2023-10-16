@@ -131,7 +131,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_query'])) {
     $result = $conn->query($searchSql);
 }
 
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php"); // Redirect to the login page after logging out
+    exit;
+}
 ?>
+
+
 
 
 
@@ -144,6 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_query'])) {
         <!-- Font Awesome Cdn Link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="img/icon.jpg" type="image/jpg"> <!-- For .png format -->
+
 
 
     </head>

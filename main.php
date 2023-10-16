@@ -1,5 +1,5 @@
 <?php
-// Get the current page filename from the URL
+
 $currentURL = $_SERVER['PHP_SELF'];
 
 // Extract just the filename without the path
@@ -54,6 +54,18 @@ if ($result->num_rows > 0) {
 //benefice
 $totalDifference = $totalPrice - $totalPrix;
 
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php"); // Redirect to the login page after logging out
+    exit;
+}
 ?>
 
 
@@ -69,11 +81,15 @@ $totalDifference = $totalPrice - $totalPrix;
     <link rel="stylesheet" href="css/style.css" />
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="icon" href="img/icon.jpg" type="image/jpg"> <!-- For .png format -->
+
 </head>
 <body>
 <div class="container">
+
     <nav>
         <ul>
+
             <li><a href="#" class="logo">
                 <img src="img/chiffre-daffaires.png" alt="">
                 <span class="nav-item">DashBoard</span>
@@ -81,7 +97,7 @@ $totalDifference = $totalPrice - $totalPrix;
             <li <?php if (isset($currentPage) && $currentPage === 'main.php') echo 'class="active"'; ?>>
                 <a href="main.php">
                     <i class="fas fa-home"></i>
-                    <span class="nav-item">Home</span>
+                    <span class="nav-item">Accueil</span>
                 </a>
             </li>
             <li><a href="sortie.php">
@@ -105,10 +121,18 @@ $totalDifference = $totalPrice - $totalPrix;
                 <i class="fas fa-question-circle"></i>
                 <span class="nav-item">Help</span>
             </a></li>
-            <li><a href="" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <span class="nav-item">Log out</span>
-            </a></li>
+
+            <li>
+
+                <a href="#" class="logout" onclick="document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="nav-item">Log out</span>
+                </a>
+            </li>
+
+            <form id="logout-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <input type="hidden" name="logout" value="1">
+            </form>
         </ul>
     </nav>
 
@@ -116,6 +140,10 @@ $totalDifference = $totalPrice - $totalPrix;
 
 
     <section class="main">
+        <center>
+        <p>Welcome, <?php echo $_SESSION['username']; ?></p>
+        </center>
+
         <div class="main-top">
             <i class="fas fa-user-cog"></i>
         </div>
@@ -141,7 +169,6 @@ $totalDifference = $totalPrice - $totalPrix;
                 <button><?php echo $totalStockItems; ?></button>
             </div>
         </div>
-
 
     </section>
 </div>

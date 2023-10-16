@@ -193,8 +193,8 @@ a:hover{
 }
 /* Add this to style the active link */
 .active a {
-    background-color: green; /* Change this to your desired color */
-    color: #fff; /* Change this to your desired text color */
+    background-color: #2ed09e; /* Change this to your desired color */
+    color: black; /* Change this to your desired text color */
 
 }
 

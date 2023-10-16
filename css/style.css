@@ -109,8 +109,8 @@ a:hover{
     font-size: 20px;
 }
 .main-skills .card button{
-    background: #008115;
-    color: #fff;
+    background: #22d1a0;
+    color: black;
     padding: 7px 15px;
     border-radius: 10px;
     margin-top: 15px;
@@ -194,8 +194,8 @@ a:hover{
 }
 /* Add this to style the active link */
 .active a {
-    background-color: green; /* Change this to your desired color */
-    color: #fff; /* Change this to your desired text color */
+    background-color: #2ed09e; /* Change this to your desired color */
+    color: black; /* Change this to your desired text color */
 
 }
 

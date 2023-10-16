@@ -193,8 +193,8 @@ a:hover{
 }
 /* Add this to style the active link */
 .active a {
-    background-color: green; /* Change this to your desired color */
-    color: #fff; /* Change this to your desired text color */
+    background-color: #2ed09e; /* Change this to your desired color */
+    color: black; /* Change this to your desired text color */
 
 }
 
@@ -278,11 +278,11 @@ input {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #22d1a0;
     width: 14%;
     border: 8;
     padding: 8px;
-    color: #FFFFFF;
+    color: black;
     font-size: 13px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;

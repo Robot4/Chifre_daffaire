@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -7,12 +8,23 @@
     <link rel="stylesheet" href="css/sortie.css" />
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="icon" href="img/icon.jpg" type="image/jpg"> <!-- For .png format -->
+
 </head>
 
 <body >
 <div class="container">
 
-    <?php include 'menu.php'; ?>
+    <?php include 'menu.php';
+    session_start();
+
+    // Check if the user is not logged in (session variable is not set)
+    if (!isset($_SESSION['username'])) {
+        header("Location: login.php"); // Redirect to the login page
+        exit;
+    }
+
+    ?>
     <section class="main">
         <h1>Client Table</h1>
         <center>
@@ -197,9 +209,10 @@
             echo "<a class=dd href='stock.php?page=" . ($currentPage + 1) . "'>Next</a>";
         }
 
-        echo '<div/>'
+        echo '<div/>';
 
-        // Close the database connection here, at the end of the script
+
+
         ?>
         <script>
 

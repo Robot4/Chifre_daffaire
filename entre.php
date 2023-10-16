@@ -56,6 +56,12 @@ $sql = "SELECT * FROM entrer WHERE name LIKE '%$searchQuery%' OR ville LIKE '%$s
 $result = $conn->query($sql);
 
 
+// Check if the user is not logged in (session variable is not set)
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +72,8 @@ $result = $conn->query($sql);
     <title>Ventes</title>
     <link rel="stylesheet" href="css/sortie.css" />
     <!-- Font Awesome Cdn Link -->
+    <link rel="icon" href="img/icon.jpg" type="image/jpg"> <!-- For .png format -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
@@ -73,10 +81,7 @@ $result = $conn->query($sql);
 <div class="container">
     <?php include 'menu.php'; ?>
     <section class="main">
-        <center>
-            <button id="showFormButton" class="add">
-                <i class="fas fa-plus"></i> Ajouter
-            </button>
+
             <br>
             <br>
 
