@@ -10,7 +10,7 @@
     font-family: "Poppins", sans-serif;
 }
 body{
-    background: #dfe9f5;
+    background: #292929;
 }
 .container{
     display: flex;
@@ -21,7 +21,7 @@ nav{
     bottom: 0;
     height: 100vh;
     left: 0;
-    background: #fff;
+    background: #292929;
     width: 244px;
     overflow: hidden;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
@@ -57,11 +57,15 @@ nav .fas{
     top: 14px;
     font-size: 20px;
     text-align: center;
+    color: #FFFFFF;
+
 }
 .nav-item{
     position: relative;
     top: 12px;
     margin-left: 10px;
+    color: #FFFFFF;
+
 }
 a:hover{
     background: #eee;

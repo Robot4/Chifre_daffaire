@@ -19,9 +19,12 @@ if (isset($_GET["id"])) {
     $sql = "DELETE FROM clients WHERE id = $client_id";
 
     if ($conn->query($sql) === TRUE) {
-        // Client deleted successfully, perform the redirection
-        header("Location: sortie.php");
-        exit(); // Make sure to exit to prevent further execution of the script
+        // Client deleted successfully
+        $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'sortie.php';
+
+        // Redirect back to the referring page
+        header("Location: $referrer");
+        exit();
     } else {
         echo "Error deleting client: " . $conn->error;
     }

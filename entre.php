@@ -1,30 +1,6 @@
 <?php
-// Establish a database connection (replace with your database credentials)
-session_start(); // Start a session
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ca";
+include 'db.php';
 
-// Create a new database connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-// Calculate the current page and the starting index
-$perPage = 4;
-if (isset($_GET['page'])) {
-$currentPage = $_GET['page'];
-} else {
-$currentPage = 1;
-}
-
-$startIndex = ($currentPage - 1) * $perPage;
-
-// SQL query to select a limited number of records based on the current page
-$sql = "SELECT * FROM stock LIMIT $startIndex, $perPage";
-$result = $conn->query($sql);
 ?>
 
 <?php
@@ -37,7 +13,7 @@ function calculateTotal($conn)
     $livreQuery = "SELECT SUM(prix - price) AS livré_total FROM sortie WHERE status = 'Livré'";
     $livreResult = $conn->query($livreQuery);
     $livreRow = $livreResult->fetch_assoc();
-    $livreTotal = $livreRow['livré_total'];
+    $livreTotal = is_numeric($livreRow['livré_total']) ? $livreRow['livré_total'] : 0;
 
     // Query to calculate the total for "Refusé" status
     $refuseQuery = "SELECT SUM(prix - 15) AS refuse_total FROM sortie WHERE status = 'Refusé'";
@@ -50,15 +26,13 @@ function calculateTotal($conn)
 
     return $total;
 }
-// SQL query to select clients (with or without a search query)
-$searchQuery = isset($_GET['search_query']) ? $_GET['search_query'] : '';
-$sql = "SELECT * FROM entrer WHERE name LIKE '%$searchQuery%' OR ville LIKE '%$searchQuery%'";
-$result = $conn->query($sql);
+
+
 
 
 // Check if the user is not logged in (session variable is not set)
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php"); // Redirect to the login page
+    header("Location: index.php"); // Redirect to the login page
     exit;
 }
 
@@ -84,54 +58,39 @@ if (!isset($_SESSION['username'])) {
 
             <br>
             <br>
-
-
-
-
-        </center>
-
-        <div class="container1">
-            <div class="form">
-                <!-- Add the "Ajouter" button -->
-
-                <!-- Container for the form to add a new client (initially hidden) -->
-                <div class="add-client-container" id="addClientContainer" style="display: none;">
-                    <form action="add_client.php" method="POST" enctype="multipart/form-data" class="login-form">
-                        <input type="file" name="image" accept="image/*" required>
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="text" name="commande" placeholder="Commande" required>
-                        <input type="text" name="prix" placeholder="Prix" required>
-
-
-                        <select name="ville" required>
-                            <option value="" disabled selected>Select Ville</option>
-                            <?php
-                            // Query the database to fetch the "ville" values from the "ville_price" table
-                            $villeQuery = "SELECT DISTINCT ville FROM ville_price";
-                            $villeResult = $conn->query($villeQuery);
-
-                            if ($villeResult->num_rows > 0) {
-                                while ($row = $villeResult->fetch_assoc()) {
-                                    $ville = $row['ville'];
-                                    echo "<option value='$ville'>$ville</option>";
-                                }
-                            }
-                            ?>
-                        </select>
-
-
-                        <select name="status" required>
-                            <option value="Demandé">Demandé</option>
-                            <option value="Livré">Livré</option>
-                            <option value="Refusé">Refusé</option>
-                        </select>
-                        <input class="send" type="submit" value="Add Client">
-                    </form>
-                </div>
-            </div>
-
-
+        <div class="search-bar">
+            <form method="GET">
+                <input class="cherch" type="text" name="search_query" id="searchQuery" placeholder="Search by Name or Ville" required>
+            </form>
         </div>
+
+
+
+        <script>
+            // Get the search input element
+            const searchInput = document.getElementById('searchQuery');
+
+            // Attach the event listener to the form element
+            const searchForm = searchInput.closest('form'); // Find the closest form element
+
+            if (searchForm) {
+                searchForm.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    // Trim and get the search query
+                    const searchQuery = searchInput.value.trim();
+
+                    // Check if the search query is not empty before performing the search
+                    if (searchQuery) {
+                        // Perform the search by redirecting to the search URL
+                        window.location.href = `entre.php?search_query=${searchQuery}`;
+                    }
+                });
+            }
+
+        </script>
+
+
 
         <div id="editClientModal" class="modal">
             <div class="modal-content">
@@ -158,93 +117,137 @@ if (!isset($_SESSION['username'])) {
             <tbody>
             <?php
 
+            if (isset($_GET['search_query'])) {
+                $searchQuery = $_GET['search_query'];
 
+                // SQL query to search clients by name or ville using a prepared statement
+                $searchSql = "SELECT * FROM entrer WHERE name LIKE ? OR ville LIKE ?";
 
+                // Prepare the statement
+                $stmt = $conn->prepare($searchSql);
 
-            // Calculate the total number of clients
-            $sqlCount = "SELECT COUNT(*) AS total FROM entrer";
-            $countResult = $conn->query($sqlCount);
-            $countRow = $countResult->fetch_assoc();
-            $totalClients = $countRow['total'];
+                if ($stmt) {
+                    // Bind the search query to the placeholders
+                    $searchParam = "%" . $searchQuery . "%";
+                    $stmt->bind_param("ss", $searchParam, $searchParam);
 
-            // Calculate the current page and the starting index
-            $perPage = 4; // Number of clients to display per page
-            if (isset($_GET['page'])) {
-                $currentPage = $_GET['page'];
-            } else {
-                $currentPage = 1;
-            }
+                    // Execute the statement
+                    $stmt->execute();
 
-            $startIndex = ($currentPage - 1) * $perPage;
+                    // Get the results
+                    $result = $stmt->get_result();
 
-            // SQL query to select a limited number of records based on the current page
-            $sql = "SELECT * FROM entrer LIMIT $startIndex, $perPage";
-            $result = $conn->query($sql);
+                    // Close the statement
+                    $stmt->close();
 
-            if ($result && $result->num_rows > 0) {
-                while ($rowEntrer = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    // Display the image using an <img> tag
-                    echo "<td><img src='" . $rowEntrer["image"] . "' alt='Client Image' width='80'></td>";
-                    echo "<td>" . $rowEntrer["name"] . "</td>";
-                    echo "<td>" . $rowEntrer["commande"] . "</td>";
-                    echo "<td>" . $rowEntrer["prix"] . "</td>";
-                    echo "<td>" . $rowEntrer["ville"] . "</td>";
-                    // Apply different styles based on the status
-                    $statusClass = "";
+                    if ($result->num_rows > 0) {
+                        while ($rowEntrer = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            // Display the image using an <img> tag
+                            echo "<td><img src='" . $rowEntrer["image"] . "' alt='Client Image' width='80'></td>";
+                            echo "<td>" . $rowEntrer["name"] . "</td>";
+                            echo "<td>" . $rowEntrer["commande"] . "</td>";
+                            echo "<td>" . $rowEntrer["prix"] . "</td>";
+                            echo "<td>" . $rowEntrer["ville"] . "</td>";
+                            // Apply different styles based on the status
+                            $statusClass = "";
 
-                    switch ($rowEntrer["status"]) {
-                        case "Livré":
-                            $statusClass = "livre";
-                            break;
-                        case "Refusé":
-                            $statusClass = "refuse";
-                            break;
-                        default:
-                            // Set a default class if needed
-                            $statusClass = "default-button";
-                            break;
+                            switch ($rowEntrer["status"]) {
+                                case "Livré":
+                                    $statusClass = "livre";
+                                    break;
+                                case "Refusé":
+                                    $statusClass = "refuse";
+                                    break;
+                                default:
+                                    // Set a default class if needed
+                                    $statusClass = "default-button";
+                                    break;
+                            }
+
+                            // Add a class to the <td> element to style it as a button
+                            echo "<td>";
+                            echo "<center>";
+                            echo "<button class='status-button $statusClass'>" . $rowEntrer["status"] . "</button>";
+                            echo "</center>";
+                            echo "</td>";
+                            // Add an edit button with a data-client-id attribute (if needed)
+                            echo "<td><a href='javascript:void(0);' class='edit-client' data-client-id='" . $rowEntrer["id"] . "'><i class='fas fa-edit'></i> Edit</a> | <a href='delete_entre.php?id=" . $rowEntrer["id"] . "'><i class='fas fa-trash'></i> Delete</a></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='7'>No clients with matching criteria found in 'entrer' table.</td></tr>";
                     }
-
-                    // Add a class to the <td> element to style it as a button
-                    echo "<td>";
-                    echo "<center>";
-
-                    echo "<button class='status-button $statusClass'>" . $rowEntrer["status"] . "</button>";
-                    echo "</center>";
-                    echo "</td>";
-                    // Add an edit button with a data-client-id attribute (if needed)
-                    echo "<td><a href='javascript:void(0);' class='edit-client' data-client-id='" . $rowEntrer["id"] . "'><i class='fas fa-edit'></i> Edit</a> | <a href='delete_entre.php?id=" . $rowEntrer["id"] . "'><i class='fas fa-trash'></i> Delete</a></td>";
-                    echo "</tr>";
                 }
-            } else {
-                echo "<tr><td colspan='7'>No clients with 'Livré' status found in 'entrer' table.</td></tr>";
             }
+            // If no search is performed, display the full data table
+            else {
+                // Continue with your regular data table processing code
+                // Calculate the total number of clients
+                $sqlCount = "SELECT COUNT(*) AS total FROM entrer";
+                $countResult = $conn->query($sqlCount);
+                $countRow = $countResult->fetch_assoc();
+                $totalClients = $countRow['total'];
 
-            // Calculate the total number of clients
-            $sqlCount = "SELECT COUNT(*) AS total FROM clients";
-            $countResult = $conn->query($sqlCount);
-            $countRow = $countResult->fetch_assoc();
-            $totalClients = $countRow['total'];
+                // Calculate the current page and the starting index
+                $perPage = 4; // Number of clients to display per page
+                if (isset($_GET['page'])) {
+                    $currentPage = $_GET['page'];
+                } else {
+                    $currentPage = 1;
+                }
 
-            // Calculate the current page and the starting index
-            $perPage = 5;
-            if (isset($_GET['page'])) {
-                $currentPage = $_GET['page'];
-            } else {
-                $currentPage = 1;
+                $startIndex = is_numeric($currentPage) ? ($currentPage - 1) * $perPage : 0;
+
+                // SQL query to select a limited number of records based on the current page
+                $sql = "SELECT * FROM entrer ORDER BY id DESC LIMIT $startIndex, $perPage";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($rowEntrer = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        // Display the image using an <img> tag
+                        echo "<td><img src='" . $rowEntrer["image"] . "' alt='Client Image' width='80'></td>";
+                        echo "<td>" . $rowEntrer["name"] . "</td>";
+                        echo "<td>" . $rowEntrer["commande"] . "</td>";
+                        echo "<td>" . $rowEntrer["prix"] . "</td>";
+                        echo "<td>" . $rowEntrer["ville"] . "</td>";
+                        // Apply different styles based on the status
+                        $statusClass = "";
+
+                        switch ($rowEntrer["status"]) {
+                            case "Livré":
+                                $statusClass = "livre";
+                                break;
+                            case "Refusé":
+                                $statusClass = "refuse";
+                                break;
+                            default:
+                                // Set a default class if needed
+                                $statusClass = "default-button";
+                                break;
+                        }
+
+                        // Add a class to the <td> element to style it as a button
+                        echo "<td>";
+                        echo "<center>";
+                        echo "<button class='status-button $statusClass'>" . $rowEntrer["status"] . "</button>";
+                        echo "</center>";
+                        echo "</td>";
+                        // Add an edit button with a data-client-id attribute (if needed)
+                        echo "<td><a href='javascript:void(0);' class='edit-client' data-client-id='" . $rowEntrer["id"] . "'><i class='fas fa-edit'></i> Edit</a> | <a href='delete_entre.php?id=" . $rowEntrer["id"] . "'><i class='fas fa-trash'></i> Delete</a></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>No clients found in 'entrer' table.</td></tr>";
+                }
             }
-
-            $startIndex = ($currentPage - 1) * $perPage;
-
-            // SQL query to select a limited number of records based on the current page
-            $sql = "SELECT * FROM clients LIMIT $startIndex, $perPage";
-            $result = $conn->query($sql);
 
             // Close the database connection
             ?>
             </tbody>
         </table>
+
         <?php
         // Calculate the total number of clients and the current page
         $perPage = 4;
@@ -254,31 +257,23 @@ if (!isset($_SESSION['username'])) {
             $currentPage = 1;
         }
 
-
         // Calculate the starting client index for the current page
         $startIndex = ($currentPage - 1) * $perPage;
-
-        // SQL query to select a limited number of records based on the current page
-        $sql = "SELECT * FROM entrer LIMIT $startIndex, $perPage";
-        $result = $conn->query($sql);
-        echo '<div class"here">';
-        if ($currentPage > 1) {
-            echo "<a class=dd href='entre.php?page=" . ($currentPage - 1) . "'>Previous</a>";
-        }
-
-        // Display "Next" button if there are more clients to show
         $sqlCount = "SELECT COUNT(*) AS total FROM entrer";
         $countResult = $conn->query($sqlCount);
         $countRow = $countResult->fetch_assoc();
         $totalClients = $countRow['total'];
 
-        if ($totalClients > $startIndex + $perPage) {
-            echo "<a class=dd href='entre.php?page=" . ($currentPage + 1) . "'>Next</a>";
+        // Display pagination buttons
+        echo '<div class="here">';
+        if ($currentPage > 1) {
+            echo "<a class='dd' href='entre.php?page=" . ($currentPage - 1) . "'>Previous</a>";
         }
 
-        echo '<div/>'
-
-        // Close the database connection here, at the end of the script
+        if (is_numeric($totalClients) && is_numeric($startIndex) && $totalClients > $startIndex + $perPage) {
+            echo "<a class='dd' href='entre.php?page=" . ($currentPage + 1) . "'>Next</a>";
+        }
+        echo '</div>';
         ?>
         <script>
 

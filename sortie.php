@@ -1,18 +1,6 @@
 <?php
-// Establish a database connection (replace with your database credentials)
-session_start(); // Start a session
+include 'db.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ca";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // SQL query to select all records from the 'clients' table
 $sql = "SELECT * FROM clients";
@@ -129,17 +117,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_query'])) {
     $searchSql = "SELECT * FROM clients WHERE name LIKE '%" . $searchQuery . "%' OR ville LIKE '%" . $searchQuery . "%'";
 
     $result = $conn->query($searchSql);
+
 }
 
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit;
 }
 
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php"); // Redirect to the login page after logging out
+    header("Location: index.php"); // Redirect to the login page after logging out
     exit;
 }
 ?>
@@ -204,8 +193,7 @@ if (isset($_POST['logout'])) {
                         }
                     }
 
-                    // Close the database connection (similar to your existing code)
-                    // ...
+
                     ?>
                 </select>
 
@@ -245,7 +233,7 @@ if (isset($_POST['logout'])) {
                 // Check if the search query is not empty before performing the search
                 if (searchQuery) {
                     // Perform the search by redirecting to the search URL
-                    window.location.href = `yourpage.php?search_query=${searchQuery}`;
+                    window.location.href = `sortie.php?search_query=${searchQuery}`;
                 }
             }
         });
@@ -317,8 +305,15 @@ if (isset($_POST['logout'])) {
                             echo "</center>";
                             echo "</td>";
                             // Add an edit button with a data-client-id attribute
-                            echo "<td class='icon-container'><a href='javascript:void(0);' class='edit-client' data-client-id='" . $row["id"] . "'><i class='fas fa-edit'></i>Edit</a><a href='delete_client.php?id=" . $row["id"] . "'><i class='fas fa-trash'></i>Delete</a></td>";
+                            echo "<td class='icon-container'><a href='javascript:void(0);' class='edit-client' data-client-id='" . $row["id"] . "'><i class='fas fa-edit'></i>Edit</a>
+                                    <a href='delete_client.php?id=" . $row["id"] . "'><i class='fas fa-trash'></i>Delete</a></td>";
+
+
+
                             echo "</tr>";
+
+
+
                         }
                     } else {
                         echo "<tr><td colspan='7'>No clients found.</td></tr>";
@@ -388,6 +383,8 @@ if (isset($_POST['logout'])) {
                 });
 
             </script>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>

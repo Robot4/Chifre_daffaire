@@ -20,44 +20,15 @@
 
     // Check if the user is not logged in (session variable is not set)
     if (!isset($_SESSION['username'])) {
-        header("Location: login.php"); // Redirect to the login page
+        header("Location: index.php"); // Redirect to the login page
         exit;
     }
 
     ?>
     <section class="main">
-        <h1>Client Table</h1>
-        <center>
-            <button id="showFormButton" class="add">
-                <i class="fas fa-plus"></i> Ajouter
-            </button>
-            <br>
-            <br>
-        </center>
-
-        <div class="container1">
-            <div class="form">
-                <!-- Add the "Ajouter" button -->
-
-                <!-- Container for the form to add a new client (initially hidden) -->
-                <div class="add-client-container" id="addClientContainer" style="display: none;">
-                    <form action="add_client.php" method="POST" enctype="multipart/form-data" class="login-form">
-                        <input type="file" name="image" accept="image/*" required>
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="text" name="commande" placeholder="Commande" required>
-                        <input type="text" name="prix" placeholder="Prix" required>
-                        <input type="text" name="ville" placeholder="Ville" required>
-                        <select name="status" required>
-                            <option value="Demandé">Demandé</option>
-                            <option value="Livré">Livré</option>
-                            <option value="Refusé">Refusé</option>
-                        </select>
-                        <input class="send" type="submit" value="Add Client">
-                    </form>
-                </div>
-            </div>
-        </div>
-
+        <br>
+        <br>
+        <br>
         <div id="editClientModal" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeEditModal">&times;</span>
@@ -103,7 +74,7 @@
             $totalClients = $countRow['total'];
 
             // Calculate the current page and the starting index
-            $perPage = 5; // Number of clients to display per page
+            $perPage = 4; // Number of clients to display per page
             if (isset($_GET['page'])) {
                 $currentPage = $_GET['page'];
             } else {

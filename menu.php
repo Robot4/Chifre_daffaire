@@ -7,7 +7,7 @@ $currentPage = basename($currentURL);
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php"); // Redirect to the login page after logging out
+    header("Location: index.php"); // Redirect to the login page after logging out
     exit;
 }
 ?>

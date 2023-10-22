@@ -7,20 +7,8 @@ $currentPage = basename($currentURL);
 ?>
 
 <?php
-// Establish a database connection (replace with your database credentials)
-session_start(); // Start a session
+include 'db.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ca";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 // SQL query to select all prix values from the 'clients' table
 $sqlTotalPrix = "SELECT SUM(prix) AS total_prix FROM clients";
 $totalPrixResult = $conn->query($sqlTotalPrix);
@@ -56,14 +44,14 @@ $totalDifference = $totalPrice - $totalPrix;
 
 
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit;
 }
 
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php"); // Redirect to the login page after logging out
+    header("Location: index.php"); // Redirect to the login page after logging out
     exit;
 }
 ?>
@@ -141,12 +129,10 @@ if (isset($_POST['logout'])) {
 
     <section class="main">
         <center>
-        <p>Welcome, <?php echo $_SESSION['username']; ?></p>
+        <p style="color: white">Welcome, <?php echo $_SESSION['username']; ?></p>
         </center>
 
-        <div class="main-top">
-            <i class="fas fa-user-cog"></i>
-        </div>
+
         <div class="main-skills">
             <div class="card">
                 <i class="fas fa-laptop-code"></i>

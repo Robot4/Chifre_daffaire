@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 13 oct. 2023 à 00:35
+-- Généré le : lun. 16 oct. 2023 à 21:50
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.1.17
 
@@ -56,11 +56,9 @@ INSERT INTO `clients` (`id`, `image`, `name`, `commande`, `prix`, `ville`, `stat
 (144, 'images/651c152f4f42b_28848a3d-1619-4c5a-b190-887b09314be4.jpg', 'Marc Vianney	', 'Ensemble Noir la taille XL', 85.00, 'Fes', 'Livré', 1, 0),
 (145, 'images/651c15b65824f_28848a3d-1619-4c5a-b190-887b09314be4.jpg', 'Hatim', 'Ensemble Biege XL Ensemble Noir XL	', 170.00, 'ElHajeb VILLE', 'Livré', 1, 0),
 (146, 'images/651c15f160968_fe4b981e-b749-443a-ab22-a9de62b85b31.jpg', 'Adil', 'Ensemble blanc XL	', 85.00, 'Agouray - Meknes', 'Livré', 1, 0),
-(147, 'images/651c162da42df_fe4b981e-b749-443a-ab22-a9de62b85b31.jpg', 'ahmed', 'Ensemble Blanc Taille M	', 85.00, 'Nador', 'Retour', 1, 0),
 (148, 'images/651c1662a14fa_e08e8ab0-b89b-4fb8-938c-ab19c75d89e3.jpg', 'Mohamed', 'Ensemble Biege D Taille XL Ensemble Noir Actually Taille XL	', 170.00, 'Guelmim', 'Livré', 1, 0),
 (149, 'images/651c169b68fdc_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Bakre Houdallah	', 'Ensemble Actually Bleu Taille : M	', 85.00, 'casbalnca', 'Livré', 1, 0),
 (150, 'images/651c16d23a3ea_28848a3d-1619-4c5a-b190-887b09314be4.jpg', 'Yassine	', 'Ensemble noir D taille XL	', 85.00, 'Echemmaia', 'Retour', 1, 0),
-(151, 'images/651c17a8433a8_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Mohcine', 'Ensemble Beige Actually Taille : XL', 85.00, 'Settat', 'Refusé', 1, 1),
 (152, 'images/651c17d157a4f_e4d0c256-4023-4344-9d59-5eecd2f0a08a.jpg', 'mochine', 'Ensemble Blanc Actually Taille : XL', 85.00, 'Settat', 'Retour', 1, 0),
 (153, 'images/651c184bc6db4_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Youssef	', 'Ensemble Actually Bleu Taille L	', 85.00, 'Drarga', 'Livré', 1, 0),
 (154, 'images/651c18a0d13a3_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Mounir	', 'Ensemble D bleu Taille M Ensemble Blanc Actually Taille XL	', 170.00, 'Tetouan', 'Livré', 1, 0),
@@ -75,8 +73,8 @@ INSERT INTO `clients` (`id`, `image`, `name`, `commande`, `prix`, `ville`, `stat
 (164, 'images/652457664476a_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Mustapha togba	', 'Ensemble Actually Beige Taille L	', 85.00, 'Sale', 'Livré', 1, 0),
 (165, 'images/65245780394db_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'mohamed', 'Ensemble Actually Noir Taille XL	', 85.00, 'Dakhla', 'Retour', 1, 0),
 (166, 'images/652457a70f4f5_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mustafa', 'Ensemble Actually Noir Taille L	', 85.00, 'jerada', 'Livré', 1, 0),
-(167, 'images/652457e02919f_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Abdel Lhaq	', 'Ensemble Actually Biege Taille XXL	', 85.00, 'Ksar Sghir', 'Demandé', 0, 0),
-(168, 'images/652458076140c_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Abdel Jalil	', 'Ensemble Actually Blue Taille XL	', 85.00, 'Marrakech', 'Demandé', 0, 0),
+(167, 'images/652457e02919f_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Abdel Lhaq	', 'Ensemble Actually Biege Taille XXL	', 85.00, 'Ksar Sghir', 'Refusé', 1, 1),
+(168, 'images/652458076140c_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Abdel Jalil	', 'Ensemble Actually Blue Taille XL	', 85.00, 'Marrakech', 'Livré', 1, 0),
 (169, 'images/6524582838265_e4d0c256-4023-4344-9d59-5eecd2f0a08a.jpg', 'Abdel karim	', 'Ensemble Blanc Actually Taille M ', 85.00, 'Marrakech', 'Retour', 1, 0),
 (170, 'images/6524583f477cb_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Abdel karim	', 'Ensemble Blue Actually Taille M', 85.00, 'Marrakech', 'Retour', 1, 0),
 (171, 'images/6524585c1e0b4_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Soulaymane	', 'Ensemble Noir Actually XL	', 85.00, 'IMZZOUREN', 'Livré', 1, 0),
@@ -84,15 +82,17 @@ INSERT INTO `clients` (`id`, `image`, `name`, `commande`, `prix`, `ville`, `stat
 (174, 'images/652459d15c8c7_28848a3d-1619-4c5a-b190-887b09314be4.jpg', 'Ali	', 'Ensemble Noir Taille M	', 0.00, 'Tanger', 'Demandé', 0, 0),
 (175, 'images/65283013cbc99_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Ayoub', 'Ensemble Actually Noir Taille XL', 85.00, 'Marrakech', 'Demandé', 0, 0),
 (176, 'images/6528302e666f0_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Ayoub', 'Ensemble Actually Blue Taille XL', 85.00, 'Marrakech', 'Demandé', 0, 0),
-(177, 'images/6528305ff2482_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mohamed', 'Ensemble Actually Noir Taille XXL	', 85.00, 'Agadir', 'Demandé', 0, 0),
-(178, 'images/6528308919c6c_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Salah	', 'Ensemble Actually noir taille XL	', 85.00, 'Meknes', 'Demandé', 0, 0),
-(179, 'images/6528309dbf80a_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'abdourahmane', 'Ensemble Actually Noir Taille XL	', 85.00, 'Dakhla', 'Demandé', 0, 0),
-(180, 'images/652830d274d2c_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mohamed', 'Ensemble Actually Noir Taille XL	', 85.00, 'Taza', 'Demandé', 0, 0),
+(177, 'images/6528305ff2482_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mohamed', 'Ensemble Actually Noir Taille XXL	', 85.00, 'Agadir', 'Livré', 1, 0),
+(178, 'images/6528308919c6c_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Salah	', 'Ensemble Actually noir taille XL	', 85.00, 'Meknes', 'Livré', 1, 0),
+(179, 'images/6528309dbf80a_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'abdourahmane', 'Ensemble Actually Noir Taille XL	', 85.00, 'Dakhla', 'Livré', 1, 0),
+(180, 'images/652830d274d2c_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mohamed', 'Ensemble Actually Noir Taille XL	', 85.00, 'Taza', 'Livré', 1, 0),
 (181, 'images/652830ffe629f_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Aziz	', 'Ensemble Actually Noir Taille XL', 85.00, 'khemis zemamra', 'Livré', 1, 0),
 (182, 'images/6528312bb5640_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'aziz', 'Ensemble Actually Blue Taille XL', 85.00, 'khemis zemamra', 'Livré', 1, 0),
-(183, 'images/6528315221587_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'marc', 'Ensemble Actually Blue Taille L	', 85.00, 'Dakhla', 'Demandé', 0, 0),
+(183, 'images/6528315221587_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'marc', 'Ensemble Actually Blue Taille L	', 85.00, 'Dakhla', 'Livré', 1, 0),
 (184, 'images/652833804e103_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Marwan	', 'Ensemble Actually Noir Taille M	', 85.00, 'Fes', 'Livré', 1, 0),
-(185, 'images/652833ceeb682_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Said	', 'Ensemble Noir Actually XXL	', 85.00, 'Meknes', 'Livré', 1, 0);
+(185, 'images/652833ceeb682_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Said	', 'Ensemble Noir Actually XXL	', 85.00, 'Meknes', 'Livré', 1, 0),
+(186, 'images/652afa15ee9b4_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'mohamed', 'Ensemble Beige Actually Taille : XL	', 85.00, 'Ben Guerir', 'Livré', 1, 0),
+(187, 'images/652d8c56e6d67_fe4b981e-b749-443a-ab22-a9de62b85b31.jpg', 'mars', 'Ensemble Blanc Taille M	', 85.00, 'casbalnca', 'Livré', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,16 @@ INSERT INTO `entrer` (`id`, `image`, `name`, `commande`, `prix`, `ville`, `statu
 (200, 'images/652830ffe629f_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Aziz	', 'Ensemble Actually Noir Taille XL', 200.00, 'khemis zemamra', 'Livré'),
 (201, 'images/6528312bb5640_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'aziz', 'Ensemble Actually Blue Taille XL', 200.00, 'khemis zemamra', 'Livré'),
 (202, 'images/652833804e103_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Marwan	', 'Ensemble Actually Noir Taille M	', 200.00, 'Fes', 'Livré'),
-(203, 'images/652833ceeb682_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Said	', 'Ensemble Noir Actually XXL	', 200.00, 'Meknes', 'Livré');
+(203, 'images/652833ceeb682_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Said	', 'Ensemble Noir Actually XXL	', 200.00, 'Meknes', 'Livré'),
+(204, 'images/652458076140c_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Abdel Jalil	', 'Ensemble Actually Blue Taille XL	', 200.00, 'Marrakech', 'Livré'),
+(205, 'images/6528305ff2482_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mohamed', 'Ensemble Actually Noir Taille XXL	', 200.00, 'Agadir', 'Livré'),
+(206, 'images/6528315221587_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'marc', 'Ensemble Actually Blue Taille L	', 200.00, 'Dakhla', 'Livré'),
+(207, 'images/6528308919c6c_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Salah	', 'Ensemble Actually noir taille XL	', 200.00, 'Meknes', 'Livré'),
+(208, 'images/652830d274d2c_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Mohamed', 'Ensemble Actually Noir Taille XL	', 200.00, 'Taza', 'Livré'),
+(209, 'images/652afa15ee9b4_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'mohamed', 'Ensemble Beige Actually Taille : XL	', 180.00, 'Ben Guerir', 'Livré'),
+(210, 'images/6528309dbf80a_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'abdourahmane', 'Ensemble Actually Noir Taille XL	', 200.00, 'Dakhla', 'Livré'),
+(211, 'images/652457e02919f_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Abdel Lhaq	', 'Ensemble Actually Biege Taille XXL	', 0.00, 'Ksar Sghir', 'Refusé'),
+(212, 'images/652d8c56e6d67_fe4b981e-b749-443a-ab22-a9de62b85b31.jpg', 'mars', 'Ensemble Blanc Taille M	', 200.00, 'casbalnca', 'Livré');
 
 -- --------------------------------------------------------
 
@@ -169,15 +178,33 @@ INSERT INTO `stock` (`id`, `image`, `name`, `commande`, `prix`, `ville`, `status
 (312, 'images/651c11b0f134c_b39d4d53-c239-409f-876b-85a8333eaa54.jpg', 'Zaki	', 'Leakers Bleu M', 70.00, 'Fes', 'Retour'),
 (313, 'images/651c1283079f1_73f630a1-5a8f-4f4c-9c4d-eacbce9f4a50.jpg', 'Mohssine', 'Ensemble NIKE Noir .M	', 70.00, 'El Jadida', 'Refusé'),
 (314, 'images/651c1318c8b69_73f630a1-5a8f-4f4c-9c4d-eacbce9f4a50.jpg', 'Ayoub', 'Ensemble Nike Noir Taill  L	', 70.00, 'Agadir', 'Retour'),
-(316, 'images/651c162da42df_fe4b981e-b749-443a-ab22-a9de62b85b31.jpg', 'ahmed', 'Ensemble Blanc Taille M	', 85.00, 'Nador', 'Retour'),
 (317, 'images/651c16d23a3ea_28848a3d-1619-4c5a-b190-887b09314be4.jpg', 'Yassine	', 'Ensemble noir D taille XL	', 85.00, 'Echemmaia', 'Retour'),
-(318, 'images/651c17a8433a8_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Mohcine', 'Ensemble Beige Actually Taille : XL', 85.00, 'Settat', 'Refusé'),
 (319, 'images/651c17d157a4f_e4d0c256-4023-4344-9d59-5eecd2f0a08a.jpg', 'mochine', 'Ensemble Blanc Actually Taille : XL', 85.00, 'Settat', 'Retour'),
 (321, 'images/6524597c4b964_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'abdelhaq', 'Ensemble noir Actually taille L	', 85.00, 'Fes', 'Retour'),
 (322, 'images/6524587b2ac68_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'Zakaria twirsi	', 'Ensemble Actually Noir Taille : L	', 85.00, 'DAROUA', 'Retour'),
 (323, 'images/65245780394db_0f861355-d0f7-46de-a257-bb01ca7ce9c5.jpg', 'mohamed', 'Ensemble Actually Noir Taille XL	', 85.00, 'Dakhla', 'Retour'),
 (324, 'images/6524583f477cb_0df34566-8d3a-47dd-86f1-ee4ddcf0b6fe.jpg', 'Abdel karim	', 'Ensemble Blue Actually Taille M', 85.00, 'Marrakech', 'Retour'),
-(325, 'images/6524582838265_e4d0c256-4023-4344-9d59-5eecd2f0a08a.jpg', 'Abdel karim	', 'Ensemble Blanc Actually Taille M ', 85.00, 'Marrakech', 'Retour');
+(325, 'images/6524582838265_e4d0c256-4023-4344-9d59-5eecd2f0a08a.jpg', 'Abdel karim	', 'Ensemble Blanc Actually Taille M ', 85.00, 'Marrakech', 'Retour'),
+(326, 'images/652457e02919f_f6b6ba70-6028-4612-8bc6-a978039199b5.jpg', 'Abdel Lhaq	', 'Ensemble Actually Biege Taille XXL	', 85.00, 'Ksar Sghir', 'Refusé');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'mehdi', '2019');
 
 -- --------------------------------------------------------
 
@@ -559,6 +586,12 @@ ALTER TABLE `stock`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `ville_price`
 --
 ALTER TABLE `ville_price`
@@ -572,19 +605,25 @@ ALTER TABLE `ville_price`
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT pour la table `entrer`
 --
 ALTER TABLE `entrer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT pour la table `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=327;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

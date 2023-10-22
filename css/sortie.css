@@ -10,7 +10,7 @@
     font-family: "Poppins", sans-serif;
 }
 body{
-    background: #f7f7f7;
+    background: #292929;
 }
 .container{
     display: flex;
@@ -21,7 +21,7 @@ nav{
     bottom: 0;
     height: 100vh;
     left: 0;
-    background: #fff;
+    background: #292929;
     width: 280px;
     overflow: hidden;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
@@ -44,7 +44,7 @@ nav{
 }
 a{
     position: relative;
-    color: rgb(85, 83, 83);
+    color: white;
     font-size: 14px;
     display: table;
     width: 280px;
@@ -57,11 +57,13 @@ nav .fas{
     top: 14px;
     font-size: 20px;
     text-align: center;
+    color: #FFFFFF;
 }
 .nav-item{
     position: relative;
     top: 12px;
     margin-left: 10px;
+    color: #FFFFFF;
 }
 a:hover{
     background: #eee;
@@ -204,17 +206,16 @@ table {
     border-collapse: collapse;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
+
 
 th, td {
     padding: 8px;
     text-align: left;
+    color: #FFFFFF;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #2d2d2d;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
